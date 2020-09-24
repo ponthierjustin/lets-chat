@@ -5,16 +5,11 @@ import { db } from "../services/firebase";
 import Grid from "@material-ui/core/Grid";
 import NavBar from "../components/Navbar.js";
 import TextField from "@material-ui/core/TextField";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-/* import SendIcon from '@material-ui/icons/Send'; */
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import Moment from "react-moment";
 
@@ -103,7 +98,7 @@ const Chat = () => {
           {chats.map((chat) => (
             <div>
               {user.uid === chat.uid ? (
-                <List className={classes.textUser}>
+                <List className={classes.textUser} style={{maxHeight: '100%', overflow: 'auto'}}>
                   <Typography variant="h5" className={classes.textUser}>
                     {chat.content}
                   </Typography>
@@ -123,7 +118,7 @@ const Chat = () => {
                     {chat.content}
                   </Typography>
                   <Typography variant="caption" className={classes.text}>
-                    {user.email}
+                    {user.uid === chat.uid}{chat.uid}
                   </Typography>
                   <Typography variant="caption">
                     <Moment
@@ -138,6 +133,38 @@ const Chat = () => {
               )}
             </div>
           ))}
+             <Container>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                size="small"
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+                value={content}
+              ></TextField>
+              <button type="submit">Send</button>
+            </form>
+            <AppBar position="fixed" color="inherint" className={classes.appBar}>
+        <Toolbar>
+        <Container>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                size="small"
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+                value={content}
+              ></TextField>
+              <button type="submit">Send</button>
+            </form>
+        </Container>
+        </Toolbar>
+      </AppBar>
+      </Container>
           <Grid
             container
             /* direction="column" */

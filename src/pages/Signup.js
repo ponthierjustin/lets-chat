@@ -8,6 +8,8 @@ import TextField from "@material-ui/core/TextField";
 import NavBar from "../components/Navbar.js";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import { auth } from "../services/firebase";
+import { db } from "../services/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +29,8 @@ const Signup = () => {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
