@@ -8,8 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import Moment from "react-moment";
 
@@ -80,25 +78,24 @@ const Chat = () => {
 
   return (
     <div>
-      <NavBar />
-      <Grid
-        container /* justify="center" alignItems="center"  
-         direction="column"  */
+      <Container
+        fixed
+        style={{ position: "fixed", top: "0", background: "white" }}
       >
+        <NavBar />
+      </Container>
+      <Grid container>
         <Grid item xs={12} sm={4}>
-          {/* <Container fixed>
-        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
-      </Container> */}
           <div>
             <strong>{user.email}</strong>
           </div>
           <button onClick={() => auth().signOut()}>Sign Out</button>
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12} style={{ margin: "20px", padding: "5px" }}>
           {chats.map((chat) => (
-            <div>
+            <Container style={{ margin: "10px", padding: "10px" }}>
               {user.uid === chat.uid ? (
-                <List className={classes.textUser} style={{maxHeight: '100%', overflow: 'auto'}}>
+                <List className={classes.textUser}>
                   <Typography variant="h5" className={classes.textUser}>
                     {chat.content}
                   </Typography>
@@ -118,7 +115,8 @@ const Chat = () => {
                     {chat.content}
                   </Typography>
                   <Typography variant="caption" className={classes.text}>
-                    {user.uid === chat.uid}{chat.uid}
+                    {user.uid === chat.uid}
+                    {chat.uid}
                   </Typography>
                   <Typography variant="caption">
                     <Moment
@@ -131,45 +129,13 @@ const Chat = () => {
                   </Typography>
                 </div>
               )}
-            </div>
+            </Container>
           ))}
-             <Container>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                size="small"
-                onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-                value={content}
-              ></TextField>
-              <button type="submit">Send</button>
-            </form>
-            <AppBar position="fixed" color="inherint" className={classes.appBar}>
-        <Toolbar>
-        <Container>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                size="small"
-                onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-                value={content}
-              ></TextField>
-              <button type="submit">Send</button>
-            </form>
-        </Container>
-        </Toolbar>
-      </AppBar>
-      </Container>
-          <Grid
-            container
-            /* direction="column" */
-            /* justify="center"
-            alignItems="center" */
+        </Grid>
+        <Grid item xs={12} sm={12} style={{ margin: "10px", padding: "10px" }}>
+          <Container
+            fixed
+            style={{ position: "fixed", bottom: "0", background: "white" }}
           >
             <form onSubmit={handleSubmit}>
               <TextField
@@ -183,7 +149,7 @@ const Chat = () => {
               ></TextField>
               <button type="submit">Send</button>
             </form>
-          </Grid>
+          </Container>
         </Grid>
       </Grid>
     </div>
