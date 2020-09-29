@@ -8,7 +8,9 @@ import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
+import SendIcon from "@material-ui/icons/Send";
+import IconButton from "@material-ui/core/IconButton";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Moment from "react-moment";
 
 const useStyles = makeStyles((theme) => ({
@@ -78,20 +80,29 @@ const Chat = () => {
 
   return (
     <div>
-      <Container
-        fixed
-        style={{ position: "fixed", top: "0", background: "white" }}
-      >
-        <NavBar />
-      </Container>
-      <Grid container>
-        <Grid item xs={12} sm={4}>
+      <NavBar />
+
+      <Grid container spacing={1.2}>
+        <Grid item xs={12} sm={3}>
           <div>
-            <strong>{user.email}</strong>
+            <Typography variant="h6" className={classes.text}>
+              {user.email}
+            </Typography>
           </div>
-          <button onClick={() => auth().signOut()}>Sign Out</button>
+          <IconButton type="submit" aria-label="submit">
+            <ExitToAppIcon onClick={() => auth().signOut()} />
+          </IconButton>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: "20px", padding: "5px" }}>
+
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          container
+          justify="center"
+          alignItems="center"
+          style={{ margin: "20px", padding: "5px" }}
+        >
           {chats.map((chat) => (
             <Container style={{ margin: "10px", padding: "10px" }}>
               {user.uid === chat.uid ? (
@@ -132,10 +143,23 @@ const Chat = () => {
             </Container>
           ))}
         </Grid>
-        <Grid item xs={12} sm={12} style={{ margin: "10px", padding: "10px" }}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          container
+          justify="center"
+          alignItems="center"
+          style={{ margin: "10px", padding: "10px" }}
+        >
           <Container
             fixed
-            style={{ position: "fixed", bottom: "0", background: "white" }}
+            style={{
+              position: "fixed",
+              bottom: "0",
+              background: "white",
+              flexDirection: "row",
+            }}
           >
             <form onSubmit={handleSubmit}>
               <TextField
@@ -147,7 +171,9 @@ const Chat = () => {
                 }}
                 value={content}
               ></TextField>
-              <button type="submit">Send</button>
+              <IconButton type="submit" aria-label="submit">
+                <SendIcon />
+              </IconButton>
             </form>
           </Container>
         </Grid>
