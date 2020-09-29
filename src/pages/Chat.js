@@ -83,12 +83,18 @@ const Chat = () => {
       <NavBar />
 
       <Grid container spacing={1.2}>
-        <Grid item xs={12} sm={3}>
-          <div>
-            <Typography variant="h6" className={classes.text}>
-              {user.email}
-            </Typography>
-          </div>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          container
+          justify="center"
+          alignItems="center"
+        >
+          <Typography variant="h6" className={classes.text}>
+            {user.email}
+          </Typography>
+
           <IconButton type="submit" aria-label="submit">
             <ExitToAppIcon onClick={() => auth().signOut()} />
           </IconButton>
@@ -124,10 +130,6 @@ const Chat = () => {
                 <div>
                   <Typography variant="h5" className={classes.text}>
                     {chat.content}
-                  </Typography>
-                  <Typography variant="caption" className={classes.text}>
-                    {user.uid === chat.uid}
-                    {chat.uid}
                   </Typography>
                   <Typography variant="caption">
                     <Moment
